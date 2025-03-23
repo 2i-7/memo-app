@@ -5,6 +5,7 @@
   height: 100vh;
   background-color: #fef5f7; 
   font-family: "Poppins", "Hiragino Maru Gothic", sans-serif;
+  padding: 20px;
 }
 
 .memo-list-container {
@@ -22,13 +23,42 @@
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.memo-editor h2{
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ff91a4;
+}
+
+.input-container input,
+.textarea-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input-container input:focus,
+.textarea-container textarea:focus {
+  border-color: #ff91a4;
+  outline: none;
+}
+
+textarea {
+  height: 150px;
 }
 
 .memo-item {
   background: white;
-  padding: 10px;
+  padding: 15px;
   border-radius: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
@@ -60,12 +90,13 @@
 }
 
 button {
-  background-color: #ff91a4; /* かわいいピンク色 */
+  background-color: #ff91a4;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 18px;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 16px;
   transition: background-color 0.3s ease;
 }
 

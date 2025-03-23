@@ -34,8 +34,21 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, selectedMemo }) => {
   return (
     <div className="memo-editor">
       <h2>{selectedMemo ? 'Edit Memo' : 'New Memo'}</h2>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-      <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Body" />
+      <div className='input-container'>
+        <input 
+          type="text" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title" 
+        />
+      </div>
+      <div className='textarea-container'>
+        <textarea 
+          value={body} 
+          onChange={(e) => setBody(e.target.value)} 
+          placeholder="Body" 
+        />
+      </div>
       <button onClick={handleSave}>{selectedMemo ? 'Update' : 'Save'}</button>
     </div>
   );
