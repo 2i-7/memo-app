@@ -22,11 +22,11 @@ const MemoList: React.FC<MemoListProps> = ({ memos, onDelete, onSelect, onEdit }
           <h3>{memo.title}</h3>
           <p>{memo.body}</p>
           <div className="memo-actions">
-            <button onClick={(e) => { e.stopPropagation(); onDelete(memo.id); }} className="delete-button">
-              🗑️
-            </button>
             <button onClick={(e) => { e.stopPropagation(); onEdit(memo); }} className="edit-button">
               ✏️
+            </button>
+            <button onClick={(e) => { e.stopPropagation(); onDelete(memo.id); }} className="delete-button">
+              🗑️
             </button>
           </div>
         </div>

@@ -70,7 +70,7 @@ button {
   background-color: #ff91a4;
   color: white;
   border: none;
-  padding: 12px 18px;
+  padding: 12px 1px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
@@ -115,8 +115,8 @@ button:hover {
 
 .memo-actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  gap: 8px;
+  justify-content: flex-end;
 }
 
 .memo-actions button {
