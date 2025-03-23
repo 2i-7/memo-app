@@ -23,6 +23,16 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ selectedMemo, onSave, onCancel,
   }, [selectedMemo]);
 
   const handleSave = () => {
+    if (title.length > 100) {
+      alert("タイトルは100文字以内で入力してください");
+      return;
+    }
+
+    if (body.length > 1000) {
+      alert("本文は1000文字以内で入力してください");
+      return;
+    }
+
     if (!selectedMemo) return;
     onSave({ ...selectedMemo, title, body });
   };
