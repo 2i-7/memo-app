@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MemoList from './components/MemoList';
 import MemoEditor from './components/MemoEditor';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import './App.css';
 
 interface Memo {
@@ -10,21 +11,24 @@ interface Memo {
 }
 
 const App: React.FC = () => {
-  const [memos, setMemos] = useState<Memo[]>([]);
+  const [memos, setMemos] = useLocalStorage<Memo[]>("memos", []);
   const [selectedMemo, setSelectedMemo] = useState<Memo | null>(null);
 
   const handleSave = (memo: Memo) => {
+    let updatedMemos;
     if (memo.id) {
-      setMemos((prevMemos) => prevMemos.map(m => m.id === memo.id ? memo : m));
+      updatedMemos = memos.map((m) => (m.id === memo.id ? memo : m));
     } else {
       const newMemo = { ...memo, id: Date.now().toString() };
-      setMemos((prevMemos) => [...prevMemos, newMemo]);
+      updatedMemos = [...memos, newMemo];
     }
+    setMemos(updatedMemos);
     setSelectedMemo(null);
   };
 
   const handleDelete = (id: string) => {
-    setMemos((prevMemos) => prevMemos.filter(memo => memo.id !== id));
+    const updatedMemos = memos.filter((memo) => memo.id !== id);
+    setMemos(updatedMemos);
     if (selectedMemo?.id === id) {
       setSelectedMemo(null);
     }
