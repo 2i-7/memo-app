@@ -56,10 +56,15 @@ const App: React.FC = () => {
     setIsEditing(true);
   };
 
+  const handleSelectMemo = (memo: Memo) => {
+    setSelectedMemo(memo);
+    setIsEditing(false);
+  };
+
   return (
     <div className="app-container">
       <div className="memo-list-container">
-        <MemoList memos={memos} onDelete={handleDelete} onEdit={handleEdit} />
+        <MemoList memos={memos} onDelete={handleDelete} onSelect={handleSelectMemo} onEdit={handleEdit} />
       </div>
       <div className="memo-editor-container">
         <button className="new-button" onClick={handleNewMemo}>New</button>
