@@ -37,10 +37,10 @@ const App: React.FC = () => {
   return (
     <div className="app-container">
       <div className="memo-list-container">
-        <MemoList memos={memos} onDelete={handleDelete} onSelect={setSelectedMemo} />
+        <MemoList memos={memos} onDelete={handleDelete} onEdit={setSelectedMemo} />
       </div>
       <div className="memo-editor-container">
-        <MemoEditor onSave={handleSave} selectedMemo={selectedMemo} />
+        <MemoEditor onSave={handleSave} selectedMemo={selectedMemo} onCancel={() => setSelectedMemo(null)} />
       </div>
     </div>
   );

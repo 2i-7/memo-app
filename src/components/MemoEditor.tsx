@@ -8,10 +8,11 @@ interface Memo {
 
 interface MemoEditorProps {
   onSave: (memo: Memo) => void;
+  onCancel: () => void;
   selectedMemo: Memo | null;
 }
 
-const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, selectedMemo }) => {
+const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, onCancel, selectedMemo }) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
@@ -49,7 +50,14 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, selectedMemo }) => {
           placeholder="Body" 
         />
       </div>
-      <button onClick={handleSave}>{selectedMemo ? 'Update' : 'Save'}</button>
+      <div className='editor-actions'>
+        <button onClick={handleSave}>{selectedMemo ? 'Update' : 'Save'}</button>
+        {selectedMemo && (
+          <button className="cancel-button" onClick={onCancel}>
+            Cancel
+          </button>
+        )}
+      </div>
     </div>
   );
 };
