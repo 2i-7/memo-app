@@ -51,7 +51,9 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ selectedMemo, onSave, onCancel,
       ) : (
         <>
           <h2>{selectedMemo?.title}</h2>
-          <p>{selectedMemo?.body}</p>
+          <p>{selectedMemo?.body.split('\n').map((line, index) => (
+            <span key={index}>{line}<br /></span>
+          ))}</p>
         </>
       )}
     </div>
