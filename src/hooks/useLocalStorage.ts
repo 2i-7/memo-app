@@ -1,20 +1,26 @@
-import { useState, useEffect } from 'react';
+// src/hooks/useLocalStorage.ts
+import { useState } from 'react';
 
-function useLocalStorage<T>(key: string, initialValue: T) {
-  // LocalStorage からデータを取得
-  const storedValue = localStorage.getItem(key);
+// T型をMemo型として定義
+export function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error("Error reading localStorage", error);
+      return initialValue;
+    }
+  });
 
-  // ロードされた値があればそれを使い、なければ初期値を使う
-  const [value, setValue] = useState<T>(
-    storedValue ? JSON.parse(storedValue) : initialValue
-  );
+  const setValue = (value: T) => {
+    try {
+      setStoredValue(value);
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error("Error writing to localStorage", error);
+    }
+  };
 
-  // value が変わった時に LocalStorage に保存
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue] as const;
+  return [storedValue, setValue] as const;
 }
-
-export default useLocalStorage;

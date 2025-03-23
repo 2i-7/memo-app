@@ -1,34 +1,40 @@
-import React, { useState } from "react";
-import { Memo } from "../App";
+// src/components/MemoEditor.tsx
+import React, { useState } from 'react';
 
-type MemoEditorProps = {
-  memo: Memo;
-  onUpdateMemo: (updatedMemo: Memo) => void;
-};
+interface MemoEditorProps {
+  onSave: (title: string, body: string) => void;
+  initialTitle?: string;
+  initialBody?: string;
+}
 
-const MemoEditor: React.FC<MemoEditorProps> = ({ memo, onUpdateMemo }) => {
-  const [title, setTitle] = useState(memo.title);
-  const [content, setContent] = useState(memo.content);
+const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, initialTitle = '', initialBody = '' }) => {
+  const [title, setTitle] = useState(initialTitle);
+  const [body, setBody] = useState(initialBody);
 
   const handleSave = () => {
-    onUpdateMemo({ ...memo, title, content });
+    if (title.trim() && body.trim()) {
+      onSave(title, body);
+      setTitle('');
+      setBody('');
+    }
   };
 
   return (
-    <div className="memo-editor">
-      <h2>メモ編集</h2>
+    <div>
       <input
         type="text"
         value={title}
-        onChange={e => setTitle(e.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
         maxLength={100}
       />
       <textarea
-        value={content}
-        onChange={e => setContent(e.target.value)}
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+        placeholder="Body"
         maxLength={1000}
       />
-      <button onClick={handleSave}>保存</button>
+      <button onClick={handleSave}>Save</button>
     </div>
   );
 };
