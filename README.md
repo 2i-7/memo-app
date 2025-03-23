@@ -3,11 +3,13 @@
 
 |言語|用途|
 |----|----|
-|React|ユーザーインターフェース（UI）の構築、コンポーネントベースの開発|
-|TypeScript|静的型付け、型安全の提供、可読性や保守性の向上|
-|React Hooks|状態管理（useState）、副作用の実行（useEffect）、ローカルストレージ管理（useLocalStorage）|
-|CSS|アプリケーションのスタイリング、Flexboxを使ったレイアウト設計|
-|LocalStorage|ブラウザのローカルストレージを使用してデータの永続化|
+|React|画面の部品（コンポーネント）を作る|
+|TypeScript|型を指定してバグを減らすために使用|
+|HTML|ウェブページの構造を作る|
+|CSS|見た目を整える|
+|LocalStorage|メモの内容を保存する|
+|useState|メモのデータを管理する（Reactの機能）|
+|useEffect|特定のタイミングで処理を実行する（Reactの機能）|
 
 
 # 機能紹介
