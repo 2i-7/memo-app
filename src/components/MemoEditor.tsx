@@ -31,10 +31,22 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ selectedMemo, onSave, onCancel,
     <div className="memo-editor">
       {isEditing ? (
         <>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} />
-          <textarea value={body} onChange={(e) => setBody(e.target.value)} />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={onCancel}>Cancel</button>
+          <input 
+            className="memo-title-input" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
+            placeholder="タイトルを入力"
+          />
+          <textarea 
+            className="memo-body-textarea" 
+            value={body} 
+            onChange={(e) => setBody(e.target.value)} 
+            placeholder="本文を入力"
+          />
+          <div className="memo-actions">
+            <button className="save-button" onClick={handleSave}>Save</button>
+            <button className="cancel-button" onClick={onCancel}>Cancel</button>
+          </div>
         </>
       ) : (
         <>
