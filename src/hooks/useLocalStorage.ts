@@ -1,20 +1,20 @@
-// hooks/useLocalStorage.ts
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.error("Error loading localStorage", error);
-      return initialValue;
-    }
-  });
+function useLocalStorage<T>(key: string, initialValue: T) {
+  // LocalStorage からデータを取得
+  const storedValue = localStorage.getItem(key);
 
+  // ロードされた値があればそれを使い、なければ初期値を使う
+  const [value, setValue] = useState<T>(
+    storedValue ? JSON.parse(storedValue) : initialValue
+  );
+
+  // value が変わった時に LocalStorage に保存
   useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(storedValue));
-  }, [key, storedValue]);
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
 
-  return [storedValue, setStoredValue] as const;
+  return [value, setValue] as const;
 }
+
+export default useLocalStorage;

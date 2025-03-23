@@ -1,4 +1,3 @@
-// components/MemoEditor.tsx
 import React, { useState } from "react";
 import { Memo } from "../App";
 
@@ -12,21 +11,21 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ memo, onUpdateMemo }) => {
   const [content, setContent] = useState(memo.content);
 
   const handleSave = () => {
-    onUpdateMemo({ ...memo, title, content});
+    onUpdateMemo({ ...memo, title, content });
   };
 
   return (
     <div className="memo-editor">
       <h2>メモ編集</h2>
-       <input
+      <input
         type="text"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={e => setTitle(e.target.value)}
         maxLength={100}
       />
       <textarea
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={e => setContent(e.target.value)}
         maxLength={1000}
       />
       <button onClick={handleSave}>保存</button>
