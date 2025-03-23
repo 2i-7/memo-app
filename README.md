@@ -1,69 +1,77 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 使用した技術
 
-## Available Scripts
+|言語|用途|
+|----|----|
+|React|ユーザーインターフェース（UI）の構築、コンポーネントベースの開発|
+|TypeScript|静的型付け、型安全の提供、可読性や保守性の向上|
+|React Hooks|状態管理（useState）、副作用の実行（useEffect）、ローカルストレージ管理（useLocalStorage）|
+|CSS|アプリケーションのスタイリング、Flexboxを使ったレイアウト設計|
+|LocalStorage|ブラウザのローカルストレージを使用してデータの永続化|
 
-In the project directory, you can run:
 
-### `npm start`
+# 機能紹介
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+|初期画面|いくつかメモを追加|
+|----|----|
+|![image](https://github.com/user-attachments/assets/68f0eb16-7d74-4324-b845-98cc93ed516d)|![image](https://github.com/user-attachments/assets/f2a036c0-2846-454d-be84-217dd78a4c20)|
+|この時点だと何もない|右上のNewボタンからメモを追加|
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+|編集機能|削除機能|
+|----|----|
+|![image](https://github.com/user-attachments/assets/e835aace-16d5-4ed9-ab30-fb05fa67d607)|![image](https://github.com/user-attachments/assets/f74684ca-4512-46ce-8538-1a12ef8b4cdc)|
+|✏️ボタンを押すと編集画面になる|🗑️ボタンを押すと削除される|
 
-### `npm test`
+|Saveボタン|Cancelボタン|
+|----|----|
+|![image](https://github.com/user-attachments/assets/6d48e179-f21c-4e9f-afad-f19e993d333d)|![image](https://github.com/user-attachments/assets/3665d774-69ce-4546-abff-8a5b84316d92)|
+|編集が完了したらSaveする|編集を抜け出したかったらCancelで元の画面に戻る|
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+|タイトルは100文字まで|本文は1000文字まで|
+|----|----|
+|![image](https://github.com/user-attachments/assets/db040cd9-67b7-4fb1-a01d-9eb75a3402b3)|![image](https://github.com/user-attachments/assets/fcdde9d1-dc9c-411b-813f-3589c0ccb3d5)|
+|タイトルの文字制限は100字なので、超えるとアラートが出る|本文の文字制限は1000字なので、超えるとアラートが出る|
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 実装した機能
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 1.メモの追加・編集・削除
 
-### `npm run eject`
+・メモの追加：新しいメモを追加できる「New」ボタンがあり、これをクリックすると作成画面になる
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+・メモの編集：メモ一覧からペンアイコンをクリックすることで、その内容が編集可能な状態になり、タイトルや本文を変更できます。変更後は「Save」ボタンで保存する。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+・メモの削除：メモ一覧からゴミ箱アイコンをクリックすることでメモを削除できる。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 2. ローカルストレージの使用
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+・メモのデータはブラウザのローカルストレージに保存され、ページをリロードしてもメモのデータが保持されるようになっている。
 
-## Learn More
+## 3. メモリスト表示
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+・メモ一覧が画面に表示され、各メモにはタイトル、本文（省略表示）があります。メモをクリックすると、メモの内容が表示される。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 4. エラーメッセージ
 
-.
-├── node_modules
-├── public
-│   ├── favicon.ico
-│   └── index.html
-├── src
-│   ├── components
-│   │   ├── MemoEditor.tsx
-│   │   ├── MemoItem.tsx
-│   │   └── MemoList.tsx
-│   ├── hooks
-│   │   └── useLocalStorage.ts
-│   ├── App.css
-│   ├── App.tsx
-│   ├── index.css
-│   ├── index.tsx
-│   └── styles.css
-├── .gitignore
-├── package-look.json
-├── package.json
-├── README.md
-└── tsconfig.json
+・メモのタイトルや本文が規定の文字数を超えている場合、アラートでユーザーにエラーメッセージを表示し、保存を防止します。
+
+# 工夫点
+
+## 技術面
+
+・キャンセルボタンを作ったことで、元の画面戻れるようにした
+
+・メモリストでは、タイトルと一行程度の本文を載せるようにした
+
+## デザイン面
+
+・桜色をイメージしてピンクぽいデザインにしてみた。
+　（沖縄は2月に散ったが、内地はおそらく桜の時期なんだろうなと思いながら作成したため）
+
+・別のボタンを誤って押さないように、ボタンにカーソルを合わせたら少し大きくなるようにした
+
+・メモリストをサイドバーのようにした
+
+
+
