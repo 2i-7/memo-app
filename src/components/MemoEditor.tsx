@@ -1,40 +1,42 @@
-// src/components/MemoEditor.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-interface MemoEditorProps {
-  onSave: (title: string, body: string) => void;
-  initialTitle?: string;
-  initialBody?: string;
+interface Memo {
+  id: string;
+  title: string;
+  body: string;
 }
 
-const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, initialTitle = '', initialBody = '' }) => {
-  const [title, setTitle] = useState(initialTitle);
-  const [body, setBody] = useState(initialBody);
+interface MemoEditorProps {
+  onSave: (memo: Memo) => void;
+  selectedMemo: Memo | null;
+}
 
-  const handleSave = () => {
-    if (title.trim() && body.trim()) {
-      onSave(title, body);
+const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, selectedMemo }) => {
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  useEffect(() => {
+    if (selectedMemo) {
+      setTitle(selectedMemo.title);
+      setBody(selectedMemo.body);
+    } else {
       setTitle('');
       setBody('');
     }
+  }, [selectedMemo]);
+
+  const handleSave = () => {
+    onSave({ id: selectedMemo?.id || '', title, body });
+    setTitle('');
+    setBody('');
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        maxLength={100}
-      />
-      <textarea
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        placeholder="Body"
-        maxLength={1000}
-      />
-      <button onClick={handleSave}>Save</button>
+    <div className="memo-editor">
+      <h2>{selectedMemo ? 'Edit Memo' : 'New Memo'}</h2>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+      <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Body" />
+      <button onClick={handleSave}>{selectedMemo ? 'Update' : 'Save'}</button>
     </div>
   );
 };

@@ -1,44 +1,43 @@
-// src/App.tsx
 import React, { useState } from 'react';
-import MemoEditor from './components/MemoEditor';
 import MemoList from './components/MemoList';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import MemoEditor from './components/MemoEditor';
+import './App.css';
 
-// Memo型を定義
 interface Memo {
+  id: string;
   title: string;
   body: string;
 }
 
 const App: React.FC = () => {
-  const [memos, setMemos] = useLocalStorage<Memo[]>('memos', []); // 型指定
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [memos, setMemos] = useState<Memo[]>([]);
+  const [selectedMemo, setSelectedMemo] = useState<Memo | null>(null);
 
-  const handleSaveMemo = (title: string, body: string) => {
-    if (editingIndex === null) {
-      setMemos([...memos, { title, body }]);
+  const handleSave = (memo: Memo) => {
+    if (memo.id) {
+      setMemos((prevMemos) => prevMemos.map(m => m.id === memo.id ? memo : m));
     } else {
-      const updatedMemos = [...memos];
-      updatedMemos[editingIndex] = { title, body };
-      setMemos(updatedMemos);
+      const newMemo = { ...memo, id: Date.now().toString() };
+      setMemos((prevMemos) => [...prevMemos, newMemo]);
     }
-    setEditingIndex(null);
+    setSelectedMemo(null);
   };
 
-  const handleDeleteMemo = (index: number) => {
-    const updatedMemos = memos.filter((_, i) => i !== index);
-    setMemos(updatedMemos);
-  };
-
-  const handleEditMemo = (index: number, title: string, body: string) => {
-    setEditingIndex(index);
-    // setTitle, setBody の代わりにメモの内容を直接編集
+  const handleDelete = (id: string) => {
+    setMemos((prevMemos) => prevMemos.filter(memo => memo.id !== id));
+    if (selectedMemo?.id === id) {
+      setSelectedMemo(null);
+    }
   };
 
   return (
-    <div>
-      <MemoEditor onSave={handleSaveMemo} />
-      <MemoList memos={memos} onDelete={handleDeleteMemo} onEdit={handleEditMemo} />
+    <div className="app-container">
+      <div className="memo-list-container">
+        <MemoList memos={memos} onDelete={handleDelete} onSelect={setSelectedMemo} />
+      </div>
+      <div className="memo-editor-container">
+        <MemoEditor onSave={handleSave} selectedMemo={selectedMemo} />
+      </div>
     </div>
   );
 };

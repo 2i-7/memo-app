@@ -1,27 +1,26 @@
-// src/components/MemoList.tsx
 import React from 'react';
-import MemoEditor from './MemoEditor';
 
 interface Memo {
+  id: string;
   title: string;
   body: string;
 }
 
 interface MemoListProps {
   memos: Memo[];
-  onDelete: (index: number) => void;
-  onEdit: (index: number, title: string, body: string) => void;
+  onDelete: (id: string) => void;
+  onSelect: (memo: Memo) => void;
 }
 
-const MemoList: React.FC<MemoListProps> = ({ memos, onDelete, onEdit }) => {
+const MemoList: React.FC<MemoListProps> = ({ memos, onDelete, onSelect }) => {
   return (
-    <div>
-      {memos.map((memo, index) => (
-        <div key={index}>
+    <div className="memo-list">
+      <h2>Memo List</h2>
+      {memos.map((memo) => (
+        <div key={memo.id} className="memo-item" onClick={() => onSelect(memo)}>
           <h3>{memo.title}</h3>
           <p>{memo.body}</p>
-          <button onClick={() => onDelete(index)}>Delete</button>
-          <button onClick={() => onEdit(index, memo.title, memo.body)}>Edit</button>
+          <button onClick={(e) => { e.stopPropagation(); onDelete(memo.id); }}>Delete</button>
         </div>
       ))}
     </div>

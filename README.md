@@ -53,6 +53,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ├── src
 │   ├── components
 │   │   ├── MemoEditor.tsx
+│   │   ├── MemoItem.tsx
 │   │   └── MemoList.tsx
 │   ├── hooks
 │   │   └── useLocalStorage.ts
