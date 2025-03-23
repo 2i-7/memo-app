@@ -1,15 +1,46 @@
-/* styles.css */
-div {
-    padding: 10px;
+.app-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
   }
   
-  input, textarea {
+  .memo-list {
+    width: 30%;
+    border-right: 2px solid #ddd;
+    padding-right: 20px;
+  }
+  
+  .memo-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .memo-list li {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+  }
+  
+  .memo-editor {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .memo-editor input,
+  .memo-editor textarea {
     width: 100%;
     margin-bottom: 10px;
+    padding: 5px;
   }
   
-  button {
-    padding: 5px 10px;
+  .memo-editor button {
+    width: 100px;
+    padding: 5px;
+    background-color: blue;
+    color: white;
+    border: none;
     cursor: pointer;
   }
   

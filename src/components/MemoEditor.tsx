@@ -1,18 +1,24 @@
 // components/MemoEditor.tsx
 import React, { useState } from "react";
+import { Memo } from "../App";
 
 type MemoEditorProps = {
-  memo: { id: number; title: string; content: string };
-  onSave: (id: number, title: string, content: string) => void;
+  memo: Memo;
+  onUpdateMemo: (updatedMemo: Memo) => void;
 };
 
-const MemoEditor: React.FC<MemoEditorProps> = ({ memo, onSave }) => {
+const MemoEditor: React.FC<MemoEditorProps> = ({ memo, onUpdateMemo }) => {
   const [title, setTitle] = useState(memo.title);
   const [content, setContent] = useState(memo.content);
 
+  const handleSave = () => {
+    onUpdateMemo({ ...memo, title, content});
+  };
+
   return (
-    <div>
-      <input
+    <div className="memo-editor">
+      <h2>メモ編集</h2>
+       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -23,7 +29,7 @@ const MemoEditor: React.FC<MemoEditorProps> = ({ memo, onSave }) => {
         onChange={(e) => setContent(e.target.value)}
         maxLength={1000}
       />
-      <button onClick={() => onSave(memo.id, title, content)}>保存</button>
+      <button onClick={handleSave}>保存</button>
     </div>
   );
 };
