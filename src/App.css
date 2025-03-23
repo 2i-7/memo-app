@@ -1,19 +1,74 @@
 .app-container {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fef5f7; 
+  font-family: "Poppins", "Hiragino Maru Gothic", sans-serif;
 }
 
 .memo-list-container {
-  width: 40%;
-  background: #f4f4f4;
+  width: 30%;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #fff4f7;
   padding: 20px;
-  border-radius: 8px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .memo-editor-container {
-  width: 60%;
-  background: #fff;
+  width: 50%;
+  background: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.memo-item {
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.memo-item:hover {
+  transform: translateY(-3px);
+  background-color: #ffe6eb;
+}
+
+.memo-item p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.memo-list-container::-webkit-scrollbar{
+  width: 8px;
+}
+
+.memo-list-container::-webkit-scrollbar-thumb{
+  background-color: #ff91a4;
+  border-radius: 10px;
+}
+
+.memo-list-container::-webkit-scrollbar-track{
+  background-color: #fff4f7;
+}
+
+button {
+  background-color: #ff91a4; /* かわいいピンク色 */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff5c78;
 }
