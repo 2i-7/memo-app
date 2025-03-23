@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 interface Memo {
   id: string;
@@ -7,57 +7,41 @@ interface Memo {
 }
 
 interface MemoEditorProps {
+  selectedMemo: Memo | null;
   onSave: (memo: Memo) => void;
   onCancel: () => void;
-  selectedMemo: Memo | null;
+  isEditing: boolean;
 }
 
-const MemoEditor: React.FC<MemoEditorProps> = ({ onSave, onCancel, selectedMemo }) => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+const MemoEditor: React.FC<MemoEditorProps> = ({ selectedMemo, onSave, onCancel, isEditing }) => {
+  const [title, setTitle] = React.useState(selectedMemo?.title || '');
+  const [body, setBody] = React.useState(selectedMemo?.body || '');
 
-  useEffect(() => {
-    if (selectedMemo) {
-      setTitle(selectedMemo.title);
-      setBody(selectedMemo.body);
-    } else {
-      setTitle('');
-      setBody('');
-    }
+  React.useEffect(() => {
+    setTitle(selectedMemo?.title || '');
+    setBody(selectedMemo?.body || '');
   }, [selectedMemo]);
 
   const handleSave = () => {
-    onSave({ id: selectedMemo?.id || '', title, body });
-    setTitle('');
-    setBody('');
+    if (!selectedMemo) return;
+    onSave({ ...selectedMemo, title, body });
   };
 
   return (
     <div className="memo-editor">
-      <h2>{selectedMemo ? 'Edit Memo' : 'New Memo'}</h2>
-      <div className='input-container'>
-        <input 
-          type="text" 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title" 
-        />
-      </div>
-      <div className='textarea-container'>
-        <textarea 
-          value={body} 
-          onChange={(e) => setBody(e.target.value)} 
-          placeholder="Body" 
-        />
-      </div>
-      <div className='editor-actions'>
-        <button onClick={handleSave}>{selectedMemo ? 'Update' : 'Save'}</button>
-        {selectedMemo && (
-          <button className="cancel-button" onClick={onCancel}>
-            Cancel
-          </button>
-        )}
-      </div>
+      {isEditing ? (
+        <>
+          <input value={title} onChange={(e) => setTitle(e.target.value)} />
+          <textarea value={body} onChange={(e) => setBody(e.target.value)} />
+          <button onClick={handleSave}>Save</button>
+          <button onClick={onCancel}>Cancel</button>
+        </>
+      ) : (
+        <>
+          <h2>{selectedMemo?.title}</h2>
+          <p>{selectedMemo?.body}</p>
+        </>
+      )}
     </div>
   );
 };

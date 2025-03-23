@@ -17,6 +17,11 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.memo-editor {
+  position: relative;
+  padding: 16px;
+}
+
 .memo-editor-container {
   width: 100%;
   max-width: 500px; /* 必要に応じて調整 */
@@ -37,7 +42,7 @@
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+
 }
 
 .input-container input,
@@ -137,4 +142,20 @@ button:hover {
 
 .memo-list-container::-webkit-scrollbar-track{
   background-color: #fff4f7;
+}
+
+.new-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-button:hover {
+  background-color: #0056b3;
 }
